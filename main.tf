@@ -152,6 +152,20 @@ resource "aws_instance" "public" {
   #key_name = "yl-key-pair"
   vpc_security_group_ids = [aws_security_group.allow_ssh.id]
 
+  user_data = <<EOF
+  #!/bin/bash
+  sudo mkdir /mydata 
+  EOF
+
+  user_data_replace_on_change = true
+
+  #!/bin/bash
+  #mkfs -t ext4 /dev/xvdb
+  #mkdir /mydata 
+  #mount /dev/xvdb /mydata/
+
+  #depends_on = [ aws_ebs_volume.ebs_volume ]
+
   #provisioner "remote-exec" {
   #  inline = [
   #    "sudo mkfs -t ext4 /dev/xvdb",
