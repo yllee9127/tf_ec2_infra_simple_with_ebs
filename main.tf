@@ -152,11 +152,12 @@ resource "aws_instance" "public" {
   #key_name = "yl-key-pair"
   vpc_security_group_ids = [aws_security_group.allow_ssh.id]
 
-  user_data = <<EOF
-  #!/bin/bash
-  sudo mkdir /mydata 
-  EOF
-
+# Indentation is important for user_data to get executed, the following indentation works
+  user_data = <<-EOF
+              #!/bin/bash
+              mkdir /mydata
+              EOF
+  
   user_data_replace_on_change = true
 
   #!/bin/bash
