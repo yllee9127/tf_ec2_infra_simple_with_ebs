@@ -155,7 +155,9 @@ resource "aws_instance" "public" {
 # Indentation is important for user_data to get executed, the following indentation works
   user_data = <<-EOF
               #!/bin/bash
+              mkfs -t ext4 /dev/xvdb
               mkdir /mydata
+              mount /dev/xvdb /mydata/
               EOF
   
   user_data_replace_on_change = true
